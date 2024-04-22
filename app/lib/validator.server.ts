@@ -3,11 +3,12 @@ import i18next from '@mitimiti/modules/i18n.server'
 
 export const validationSchema = async (request: Request) => {
   const t = await i18next.getFixedT(request, 'translation');
-  const errorValue = t('example')
+  const errorValue = t('validator')
   console.log('value', errorValue)
+
   return z.object({
-    cityFrom: z.string().min(1, { message: 'Debes seleccionar un origen' }),
-    cityTo: z.string().min(1, { message: 'Debes seleccionar un destino' }),
+    cityFrom: z.string().min(1, { message: `${t('validator.selectOrigin')}` }),
+    cityTo: z.string().min(1, { message: `${t('validator.selectDestination')}` }),
     date: z.string().refine(
       (val) => {
         const inputDate = new Date(Number(val)).setHours(0, 0, 0, 0);
@@ -15,7 +16,7 @@ export const validationSchema = async (request: Request) => {
         return inputDate >= currentDate;
       },
       {
-        message: 'La fecha debe ser mayor a hoy',
+        message: `${t('validator.selectDate')}`
       }
     ),
     seats: z
@@ -23,10 +24,10 @@ export const validationSchema = async (request: Request) => {
         invalid_type_error: errorValue,
       })
       .refine((val) => val > 0, {
-        message: `${t('example')}`
+        message: `${t('validator.minimumSeating')}`
       })
       .refine((val) => val < 5, {
-        message: 'Debes seleccionar maximo 4 cupos',
+        message: `${t('validator.maximumSeating')}`
       }),
   });
 }

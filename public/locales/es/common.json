@@ -267,5 +267,12 @@
     "date": "1:08 PM, hace 2 días",
     "buttonIgnore": "ignorar",
     "buttonComment": "Dejar un comentario"
+  },
+  "validator":{
+    "selectOrigin":"Debes seleccionar un origen",
+    "selectDestination":"Debes seleccionar un destino",
+    "selectDate":"La fecha debe ser mayor a hoy",
+    "minimumSeating": "Debes seleccionar al menos un cupo",
+    "maximumSeating": "Debes seleccionar maximo 4 cupos"
   }
 }
